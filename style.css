@@ -1,0 +1,51 @@
+textarea{
+  width: 95%;
+  border: 5px solid #edece3;
+  padding: 5px;
+  margin: 2px 0; 
+}
+
+/* table */
+table {
+  width:100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  box-shadow: 0px 7px 20px rgb(195, 195, 195);
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+ background-color:#fff;
+}
+
+table th {
+  background-color: #edece3;
+  color: #444444;
+}
+/* end table */
+
+
+.inputArea{ 
+  background-color: #F4F4F4;
+  width: 50%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+/*Media for small screens*/
+@media only screen and (max-width: 200px){
+  .inputArea{
+    display: none; 
+  }
+}

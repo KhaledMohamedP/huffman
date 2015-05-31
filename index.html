@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Huffman Encoding</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="inputArea">
+    <h3> Huffman Coding </h3> 
+    <textarea  type="text" id="enCoder" placeholder="type text here e.g 'Mississippi river'" autofocus></textarea>
+    <table>
+        <tbody>
+            <tr>
+                <th>Character</th>
+                <th>Appearance</th>
+                <th>Probability</th>
+                <th>Code</th>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+         <tfoot>
+            <tr>
+                <th id="countChar">0</th>
+                <th id="bits">0</th>
+            </tr>
+        </tfoot>
+    </table>
+    <table>
+         <tfoot>
+            <tr>
+                <th id="fullCode"></th>
+            </tr>
+        </tfoot>
+    </table>
+    <textarea  disabled type="text" id="deCoder" placeholder="insert the code"></textarea>
+    <div id="result"></div>
+
+
+    </div>
+    <script src="HuffmanCoding.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
