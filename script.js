@@ -1,6 +1,7 @@
 var table = document.getElementsByTagName('table')[0];
 var enCoder = document.getElementById('enCoder');
 var deCoder = document.getElementById('deCoder');
+var resultID = document.getElementById('result');
 var Huffman;
 //result
 var countChar = document.getElementById('countChar');
@@ -44,6 +45,8 @@ function removeAllRows(elm) {
     countChar.innerHTML = '0';
     bits.innerHTML = '0';
     fullCode.innerText = '';
+    deCoder.value = '';
+    result.innerText = '';
 }
 
 function updateTable(keys, HuffmanCode) {
@@ -100,7 +103,6 @@ enCoder.addEventListener('input', function inputListener(e) {
 deCoder.addEventListener('input', function inputListener(e) {
     //cleanup 
     var str = Huffman.readCode(deCoder.value);
-    var resultID = document.getElementById('result');
     resultID.innerText = str;
     // sortedKeys = sortObject(list);
 
