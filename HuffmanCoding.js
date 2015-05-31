@@ -9,21 +9,10 @@ function Node(char, val, right, left) {
     this.right = right;
     this.left = left;
 }
+
 Node.prototype = {
     isLeaf: function() {
         return this.right == null && this.left == null;
-    },
-    inOrder: function() {
-        var arr = [];
-        (function inOrderToArray(node) {
-            if (node == null) {
-                return;
-            }
-            inOrderToArray(node.left);
-            if (node.isLeaf()) arr.push(node);
-            inOrderToArray(node.right);
-        })(this)
-        return arr;
     }
 }
 
@@ -37,8 +26,7 @@ function HuffmanCoding(str) {
 HuffmanCoding.prototype = {
     createTable: function(str) {
         var list = {};
-
-        for (var i = 0; i < str.length; i++) {
+        for (var i = str.length - 1; i >= 0; i--) {
             char = getChar(str[i]);
             if (list[char] == undefined) {
                 list[char] = 1;
