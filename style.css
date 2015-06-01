@@ -27,6 +27,10 @@ table tr:nth-child(even) {
 table tr:nth-child(odd) {
  background-color:#fff;
 }
+table tr{
+  overflow: hidden; 
+  width: 20px;
+}
 
 table th {
   background-color: #edece3;
@@ -35,17 +39,47 @@ table th {
 /* end table */
 
 
-.inputArea{ 
+.enCoder{ 
   background-color: #F4F4F4;
-  width: 50%;
-  padding: 20px;
+  width: 45%;
+  padding: 10px;
   border-radius: 10px;
+  float:left;
+  margin: 5px;
+  
+}
+.deCoder{ 
+  width: 45%;
+  background-color: #F4F4F4;
+  padding: 10px;
+  border-radius: 10px;
+  float:right;
+  margin: 5px;
+  
 }
 
+.stat{
+  width: 45%;
+  float:right; 
+  background-color: #F4F4F4;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+
+}
 
 /*Media for small screens*/
-@media only screen and (max-width: 200px){
-  .inputArea{
-    display: none; 
+@media all and (max-width: 900px) and (min-width: 0px){
+  .deCoder{
+    width:95%;
+    float:left;
+  }
+  .enCoder{
+    width:95%;
+    float:left; 
+  }
+  .stat{
+    width:95%;
+    float:left; 
   }
 }

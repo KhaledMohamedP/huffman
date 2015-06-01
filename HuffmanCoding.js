@@ -13,10 +13,21 @@ function Node(char, val, right, left) {
 Node.prototype = {
     isLeaf: function() {
         return this.right == null && this.left == null;
+    },
+    search: function(value) {
+
+        return (function findElm(node, value) {
+            if (node == null) return;
+            console.log(node.value, value)
+            if (node.value === value) return node;
+            findElm(node.left, value)
+            findElm(node.right, value)
+        })(this, value);
     }
 }
 
 function HuffmanCoding(str) {
+    this.input = str;
     this.list = this.createTable(str);
     this.table = this.sortObject(this.list);
     this.root = this.createTree();
@@ -27,23 +38,12 @@ HuffmanCoding.prototype = {
     createTable: function(str) {
         var list = {};
         for (var i = str.length - 1; i >= 0; i--) {
-            char = getChar(str[i]);
+            char = str[i];
             if (list[char] == undefined) {
                 list[char] = 1;
             } else {
                 list[char] = ++list[char];
             }
-        }
-
-        function getChar(char) {
-            if (char.charCodeAt() == 32) {
-                char = ' '
-            } else if (char.charCodeAt() == 9) {
-                char = '\t'
-            } else if (char.charCodeAt() == 10) {
-                char = "\n"
-            }
-            return char;
         }
         return list;
     },
@@ -79,26 +79,19 @@ HuffmanCoding.prototype = {
         return list.pop();
     },
     createCode: function() {
-        var node = this.root;
-        var str = [];
-
         (function generating(node, s) {
             if (node == null) return;
             if (node.isLeaf()) {
                 node.code = s;
-                str.push(s);
                 return;
             }
             generating(node.left, s + '0');
             generating(node.right, s + '1');
-        })(node, '');
-
-        this.root = node;
-        return str;
+        })(this.root, '');
     },
     readCode: function(code) {
         var node = this.root,
-            output = '',
+            output = [],
             code = code.replace(/\s/g, '');
         while (code.length > 0) {
             var ch = code.charAt(0);
@@ -110,13 +103,13 @@ HuffmanCoding.prototype = {
 
 
             if (node.isLeaf()) {
-                output += node.value;
+                output.push(node.value);
                 node = this.root; //After finding the element 
             }
 
             code = code.substr(1);
         }
 
-        return output;
+        return output.join('');
     }
 }

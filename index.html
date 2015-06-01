@@ -8,15 +8,16 @@
 </head>
 
 <body>
-    <div class="inputArea">
-    <h3> Huffman Coding </h3> 
+    <h2> Huffman Coding </h2> 
+    <div class="enCoder">
+    <h2>Encoder</h2> 
     <textarea  type="text" id="enCoder" placeholder="type text here e.g 'Mississippi river'" autofocus></textarea>
     <table>
         <tbody>
             <tr>
-                <th>Character</th>
-                <th>Appearance</th>
-                <th>Probability</th>
+                <th>Char</th>
+                <th>App</th>
+                <th>%</th>
                 <th>Code</th>
             </tr>
         </tbody>
@@ -36,9 +37,15 @@
             </tr>
         </tfoot>
     </table>
-    <textarea  disabled type="text" id="deCoder" placeholder="insert the code"></textarea>
-    <div id="result"></div>
+    </div>
+    <div class="deCoder">
+        <h2>Decoder</h2> 
+        <textarea  disabled type="text" id="deCoder" placeholder="insert the code"></textarea>
+        <div id="result"></div>
 
+    </div>
+    <div class="stat">
+        <h2>Stat</h2> 
 
     </div>
     <script src="HuffmanCoding.js"></script>
