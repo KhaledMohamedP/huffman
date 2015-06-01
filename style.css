@@ -63,15 +63,15 @@ h2 {
 /*Media for small screens*/
 @media all and (max-width: 800px) and (min-width: 0px){
   .deCoder{
-    width:95%;
+    width:90%;
     float:left;
   }
   .enCoder{
-    width:95%;
+    width:90%;
     float:left; 
   }
   .stat{
-    width:95%;
+    width:90%;
     float:left; 
   }
 }
