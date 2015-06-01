@@ -8,45 +8,36 @@
 </head>
 
 <body>
-    <h2> Huffman Coding </h2> 
-    <div class="enCoder">
-    <h2>Encoder</h2> 
-    <textarea  type="text" id="enCoder" placeholder="type text here e.g 'Mississippi river'" autofocus></textarea>
-    <table>
-        <tbody>
-            <tr>
-                <th>Char</th>
-                <th>App</th>
-                <th>%</th>
-                <th>Code</th>
-            </tr>
-        </tbody>
-    </table>
-    <table>
-         <tfoot>
-            <tr>
-                <th id="countChar">0</th>
-                <th id="bits">0</th>
-            </tr>
-        </tfoot>
-    </table>
-    <table>
-         <tfoot>
-            <tr>
-                <th id="fullCode"></th>
-            </tr>
-        </tfoot>
-    </table>
+    <h2> Huffman Coding </h2>
+    <div class="box enCoder">
+        <h2>Encoder</h2>
+        <textarea type="text" id="enCoder" placeholder="type text here e.g 'Mississippi river'" autofocus></textarea>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Character</th>
+                    <th>Frequency</th>
+                    <th>%</th>
+                    <th>Code</th>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="deCoder">
-        <h2>Decoder</h2> 
-        <textarea  disabled type="text" id="deCoder" placeholder="insert the code"></textarea>
+    <div class="box deCoder">
+        <h2>Decoder</h2>
+        <textarea disabled type="text" id="deCoder" placeholder="insert the code [takes binary character 0 or 1]"></textarea>
         <div id="result"></div>
-
     </div>
-    <div class="stat">
-        <h2>Stat</h2> 
-
+    <div class="box stat">
+        <h2>Stat</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>som</th>
+                    <th>value</th>
+                </tr>
+            </thead>
+        </table>
     </div>
     <script src="HuffmanCoding.js"></script>
     <script src="script.js"></script>

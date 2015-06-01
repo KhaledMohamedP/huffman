@@ -101,10 +101,11 @@ HuffmanCoding.prototype = {
                 node = node.right;
             }
 
-
-            if (node.isLeaf()) {
-                output.push(node.value);
-                node = this.root; //After finding the element 
+            if (node !== null) {
+                if (node.isLeaf()) {
+                    output.push(node.value);
+                    node = this.root; //After finding the element 
+                }
             }
 
             code = code.substr(1);

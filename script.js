@@ -1,28 +1,31 @@
+var Huffman, timing;
+
+//Encoder
 var table = document.getElementsByTagName('table')[0];
 var enCoder = document.getElementById('enCoder');
+
+// Decoder
 var deCoder = document.getElementById('deCoder');
-var Huffman;
-//result
-var countChar = document.getElementById('countChar');
-var bits = document.getElementById('bits');
-var fullCode = document.getElementById('fullCode');
-// var prob = document.getElementById('prob');
-//End-result
+var resultID = document.getElementById('result');
 
-
+//Stat
 
 function createRow(char, apperane, probability, code) {
     var row = document.createElement('tr');
+
     var charTD = document.createElement('td');
     var apperaneTD = document.createElement('td');
     var probabilityTD = document.createElement('td');
     var codeTD = document.createElement('td');
-
+    
     //copy the info
     charTD.innerText = char;
-    apperaneTD.innerText = apperane;
+    apperaneTD.innerText = apperane + 'x';
     probabilityTD.innerText = probability + '%';
     codeTD.innerText = code;
+
+    //styling
+    codeTD.className = 'code';
 
     //append to the table 
     row.appendChild(charTD);
@@ -37,42 +40,38 @@ function removeAllRows(elm) {
     var lastElm;
     while (elm.length > 1) {
         lastElm = elm.length - 1;
-        // if(elm[lastElm].tagName == "TR"){
         elm[lastElm].parentNode.removeChild(elm[lastElm]);
-        // }
     }
-    countChar.innerHTML = '0';
-    bits.innerHTML = '0';
-    fullCode.innerText = '';
+}
+
+function DefaultValues(){
     deCoder.value = '';
-    result.value = '';
+    resultID.innerText = '';
 }
 
 function updateTable(keys, HuffmanCode) {
     var probability,
-        occurance,
+        frequency,
         size = enCoder.value.length;
 
     //result 
     var charBits = 0,
         resultProb = 0;
-    //End-result
-    keys.forEach(function readElement(e) {
-        occurance = e.freq;
-        probability = e.freq / size;
-        probability = probability.toPrecision(2);
 
-        createRow(getChar(e.value), occurance, probability, e.code);
+    //End-result
+    keys.forEach(function readElement(elm) {
+        frequencys = elm.freq;
+        probability = ((elm.freq / size) * 100).toFixed(0);
+        var char = getChar(elm.value); 
+        createRow(char, frequencys, probability, elm.code);
 
         //result
         resultProb += Number(probability);
-        charBits += (e.freq * 8);
+        charBits += (elm.freq * 8);
         //change the dom
         //End-result
     });
 
-    countChar.innerHTML = keys.length + ' Characters';
-    bits.innerHTML = size + ' Times';
     // fullCode.innerText = enCoder.value + '\nCode : ' + HuffmanCode.join(' ');
 }
 
@@ -94,40 +93,27 @@ console.log(a,objs[a] , b,objs[b], objs[a] < objs[b]);
 return keys[a] < keys[b]})
  */
 
-var timing, time = [];
 enCoder.addEventListener('input', function inputListener(e) {
     //cleanup 
     deCoder.disabled = true;
-
     timing = setTimeout(function() {
+        removeAllRows(table.children);
+        DefaultValues();
         if (enCoder.value !== "") {
-            // for (var i = 500; i >= 0; i--) {
-            removeAllRows(table.children);
-            var beginTime = +new Date();
             Huffman = new HuffmanCoding(enCoder.value);
-            var endTime = +new Date();
-            time.push(endTime - beginTime)
-                // };
             updateTable(Huffman.table, Huffman.code);
-            // var result = time.reduce(function(a, b) {
-            //     return a + b;
-            // });
-            console.log(time[0]);
-            console.log(beginTime);
-            console.log(endTime);
             deCoder.disabled = false;
         }
-    }, 200);
-    time = [];
+    }, 400);
 
     // sortedKeys = sortObject(list);
 
 });
+
 deCoder.addEventListener('input', function inputListener(e) {
     //cleanup 
+    deCoder.value = e.target.value.replace(/[^01]/g, '');
     var str = Huffman.readCode(deCoder.value);
-    var resultID = document.getElementById('result');
     resultID.innerText = str;
-    // sortedKeys = sortObject(list);
 
 });
