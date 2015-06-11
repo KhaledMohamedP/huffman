@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Huffman Encoding</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="_/css/style.css">
 </head>
 
 <body>
-    <h2> Huffman Coding </h2>
+    <header>
+        <h1> Huffman Coding </h1>
+    </header>
     <div class="box enCoder">
         <h2>Encoder</h2>
         <textarea type="text" id="enCoder" placeholder="type text here e.g 'Mississippi river'" autofocus></textarea>
@@ -28,19 +30,15 @@
         <textarea disabled type="text" id="deCoder" placeholder="insert the code [takes binary character 0 or 1]"></textarea>
         <div id="result"></div>
     </div>
-    <div class="box stat">
-        <h2>Stat</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>som</th>
-                    <th>value</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="box graph">
+        <h2>Graph</h2>
+
     </div>
-    <script src="HuffmanCoding.js"></script>
-    <script src="script.js"></script>
+
+    <script src="_/js/HuffmanCoding.js"></script>
+    <script src="_/js/script.js"></script>
+    <script src="_/js/d3js.js"></script>
+    <script src="_/js/graph.js"></script>
 </body>
 
 </html>

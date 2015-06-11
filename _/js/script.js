@@ -1,4 +1,5 @@
-var Huffman, timing;
+var Huffman = new HuffmanCoding(),
+    timing;
 
 //Encoder
 var table = document.getElementsByTagName('table')[0];
@@ -8,7 +9,31 @@ var enCoder = document.getElementById('enCoder');
 var deCoder = document.getElementById('deCoder');
 var resultID = document.getElementById('result');
 
-//Stat
+
+//Events 
+enCoder.addEventListener('input', function inputListener(e) {
+    //cleanup 
+    deCoder.disabled = true;
+    timing = setTimeout(function() {
+        removeAllRows(table.children);
+        removeGraph(); 
+        DefaultValues();
+        if (enCoder.value !== "") {
+            Huffman.init(enCoder.value);
+            updateTable(Huffman.table, Huffman.code);
+            updateGraph(Huffman.table);
+            deCoder.disabled = false;
+        }
+    }, 400);
+
+});
+
+deCoder.addEventListener('input', function inputListener(e) {
+    deCoder.value = e.target.value.replace(/[^01]/g, '');
+    var list = Huffman.readCode(deCoder.value);
+    resultID.innerText = list.join('');
+});
+// End of events
 
 function createRow(char, apperane, probability, code) {
     var row = document.createElement('tr');
@@ -17,7 +42,7 @@ function createRow(char, apperane, probability, code) {
     var apperaneTD = document.createElement('td');
     var probabilityTD = document.createElement('td');
     var codeTD = document.createElement('td');
-    
+
     //copy the info
     charTD.innerText = char;
     apperaneTD.innerText = apperane + 'x';
@@ -36,6 +61,8 @@ function createRow(char, apperane, probability, code) {
     table.appendChild(row);
 }
 
+
+//Default functions 
 function removeAllRows(elm) {
     var lastElm;
     while (elm.length > 1) {
@@ -44,38 +71,38 @@ function removeAllRows(elm) {
     }
 }
 
-function DefaultValues(){
+function removeGraph(){
+    var graph = document.querySelector('svg')
+    if(graph) graph.parentElement.removeChild(graph);
+}
+
+function DefaultValues() {
     deCoder.value = '';
     resultID.innerText = '';
 }
+//End of Default functions 
 
+//Update function 
+function updateGraph(HuffmanTable){
+    drawGraph(HuffmanTable)
+}
 function updateTable(keys, HuffmanCode) {
     var probability,
         frequency,
         size = enCoder.value.length;
 
-    //result 
-    var charBits = 0,
-        resultProb = 0;
-
     //End-result
     keys.forEach(function readElement(elm) {
         frequencys = elm.freq;
         probability = ((elm.freq / size) * 100).toFixed(0);
-        var char = getChar(elm.value); 
+        var char = getChar(elm.value);
         createRow(char, frequencys, probability, elm.code);
-
-        //result
-        resultProb += Number(probability);
-        charBits += (elm.freq * 8);
-        //change the dom
-        //End-result
     });
 
-    // fullCode.innerText = enCoder.value + '\nCode : ' + HuffmanCode.join(' ');
 }
+//End of Update function 
 
-
+//Helper functions
 function getChar(char) {
     if (char.charCodeAt() == 32) {
         char = 'Space'
@@ -86,34 +113,3 @@ function getChar(char) {
     }
     return char;
 }
-
-/*
-keys.sort(function(a,b){ 
-console.log(a,objs[a] , b,objs[b], objs[a] < objs[b]); 
-return keys[a] < keys[b]})
- */
-
-enCoder.addEventListener('input', function inputListener(e) {
-    //cleanup 
-    deCoder.disabled = true;
-    timing = setTimeout(function() {
-        removeAllRows(table.children);
-        DefaultValues();
-        if (enCoder.value !== "") {
-            Huffman = new HuffmanCoding(enCoder.value);
-            updateTable(Huffman.table, Huffman.code);
-            deCoder.disabled = false;
-        }
-    }, 400);
-
-    // sortedKeys = sortObject(list);
-
-});
-
-deCoder.addEventListener('input', function inputListener(e) {
-    //cleanup 
-    deCoder.value = e.target.value.replace(/[^01]/g, '');
-    var str = Huffman.readCode(deCoder.value);
-    resultID.innerText = str;
-
-});
