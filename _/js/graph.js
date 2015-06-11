@@ -1,7 +1,7 @@
-//parse data 
 function drawGraph(HuffmanTable) {
-    var tableSize = HuffmanTable.length; 
-    var list = HuffmanTable;
+    //parse data 
+    var list = HuffmanTable,
+        tableSize = HuffmanTable.length; 
 
     while (list.length > 1) {
         var y = list.pop();
@@ -20,7 +20,7 @@ function drawGraph(HuffmanTable) {
             bottom: 5,
             left: 5
         },
-        width = (120 * tableSize) - margin.right - margin.left,
+        width = (70 * tableSize) - margin.right - margin.left,
         height = (70 * tableSize) - margin.top - margin.bottom;
 
     var i = 0;
@@ -35,12 +35,9 @@ function drawGraph(HuffmanTable) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    root = list[0];
-    // update(root);
+    root = list.pop();
 
-    // function update(source) {
-    console.log('update')
-        // Compute the new tree layout.
+    // Compute the new tree layout.
     var nodes = tree.nodes(root),
         links = tree.links(nodes);
     // Normalize for fixed-depth.
@@ -70,24 +67,25 @@ function drawGraph(HuffmanTable) {
         .duration(1000)
         .ease('elastic');
 
-
     var textT = nodeEnter.append('text')
         .attr('y', 5)
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "middle");
 
     textT.transition()
         .delay(function(d, i) {
             return i * 120;
         })
         .text(function(d) {
-            return d.value
-        })
+            return d.value;
+        });
+
     nodeEnter.append('text')
         .attr("y", 40)
         .attr("text-anchor", "middle")
         .text(function(d, i) {
             return d.code;
         }).style({'font-size': '10px', 'font-weight': 'normal'})
+
     // Declare the linksâ€¦
     var link = svg.selectAll("path.link")
         .data(links, function(d) {
@@ -96,13 +94,11 @@ function drawGraph(HuffmanTable) {
 
     // Enter the links.
     var linkT = link.enter().insert("path", "g")
-        .attr("class", "link")
+        .attr("class", "link");
 
     linkT.transition()
         .delay(function(d, i) {
             return i * 100;
         })
-        .attr("d", diagonal)
-
-    
+        .attr("d", diagonal);
 }

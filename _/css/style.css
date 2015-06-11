@@ -4,26 +4,44 @@ textarea {
     padding: 5px;
     margin: 2px 0;
 }
-/* table */
 
+.box {
+    background-color: #F4F4F4;
+    width: 46%;
+    padding: 11px;
+    border-radius: 10px;
+    float: left;
+    margin: 5px;
+    overflow: scroll;
+}
+
+.box h2 {
+    border-bottom: 1px solid rgb(229, 229, 229);
+    border-left: 1px solid rgb(244, 244, 244);
+    color: dimgrey;
+    padding: 5px;
+}
+
+.box #result {
+    background: #edece3;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+/* table */
 table {
     width: 100%;
 }
 
-table,
-th,
-td {
+table, th, td {
     border-collapse: collapse;
-    box-shadow: 0px 7px 20px rgb(195, 195, 195);
 }
 
-table,
-th {
+table, th {
     border-bottom: 2px solid white;
 }
 
-th,
-td {
+th, td {
     padding: 10px;
     text-align: left;
 }
@@ -51,38 +69,22 @@ table th {
 }
 /* end table */
 
-.box {
-    background-color: #F4F4F4;
-    width: 46%;
-    padding: 11px;
-    border-radius: 10px;
-    float: left;
-    margin: 5px;
-    overflow: scroll;
-}
+/* Graph */
 
-.box h2 {
-    border-bottom: 1px solid rgb(229, 229, 229);
-    border-left: 1px solid rgb(244, 244, 244);
-    color: dimgrey;
-    padding: 5px;
-}
-
-/* graph */
 .node circle {
     fill: #fff;
 }
 
 .node text {
     font: 14px sans-serif;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
 .link {
     fill: none;
     stroke: #ccc;
 }
-/* End graph */
+/* End graph*/
 
 /*Media for small screens*/
 @media all and (max-width: 800px) and (min-width: 0px) {
@@ -94,10 +96,8 @@ table th {
         width: 90%;
         float: left;
     }
-    
-    .graph{
+    .graph {
         width: 90%;
         float: left;
     }
 }
-

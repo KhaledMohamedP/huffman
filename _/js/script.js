@@ -31,7 +31,7 @@ enCoder.addEventListener('input', function inputListener(e) {
 deCoder.addEventListener('input', function inputListener(e) {
     deCoder.value = e.target.value.replace(/[^01]/g, '');
     var list = Huffman.readCode(deCoder.value);
-    resultID.innerText = list.join('');
+    resultID.innerHTML = list.join('');
 });
 // End of events
 
@@ -44,11 +44,12 @@ function createRow(char, apperane, probability, code) {
     var codeTD = document.createElement('td');
 
     //copy the info
-    charTD.innerText = char;
-    apperaneTD.innerText = apperane + 'x';
-    probabilityTD.innerText = probability + '%';
-    codeTD.innerText = code;
+    charTD.innerHTML = char;
+    apperaneTD.innerHTML = apperane + 'x';
+    probabilityTD.innerHTML = probability + '%';
+    codeTD.innerHTML = code;
 
+    console.log
     //styling
     codeTD.className = 'code';
 
@@ -78,7 +79,7 @@ function removeGraph(){
 
 function DefaultValues() {
     deCoder.value = '';
-    resultID.innerText = '';
+    resultID.innerHTML = '';
 }
 //End of Default functions 
 
