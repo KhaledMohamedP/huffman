@@ -37,26 +37,26 @@ function drawGraph(HuffmanTable) {
 
     root = list.pop();
 
-    // Compute the new tree layout.
     var nodes = tree.nodes(root),
         links = tree.links(nodes);
-    // Normalize for fixed-depth.
+
     nodes.forEach(function(d) {
         d.y = d.depth * 70;
     });
-    // Declare the nodesâ€¦
+
     var node = svg.selectAll("g.node")
         .data(nodes, function(d) {
             return d.id || (d.id = ++i);
         });
 
-    // Enter the nodes.
-    var nodeEnter = node.enter().append("g").attr("class", "node")
-        .attr("transform", function(d) {
-            return "translate(" + d.x + "," + d.y + ")";
-        });
+    var nodeEnter = node.enter().append("g")
+                                .attr("class", "node")
+                                .attr("transform", function(d) {
+                                    return "translate(" + d.x + "," + d.y + ")";
+                                });
 
-    var circle = nodeEnter.append("circle").attr("r", 0);
+    var circle = nodeEnter.append("circle")
+                          .attr("r", 0);
 
     circle.transition()
         .delay(function(d, i) {
@@ -67,38 +67,60 @@ function drawGraph(HuffmanTable) {
         .duration(1000)
         .ease('elastic');
 
-    var textT = nodeEnter.append('text')
-        .attr('y', 5)
-        .attr("text-anchor", "middle");
+    //Enter the char 
+    var charText = nodeEnter.append('text')
+                            .attr('y', 5)
+                            .attr("text-anchor", "middle")
+                            .style('font-size', function(d,i){
+                                if(d.value.length > 14){
+                                    return 8;
+                                }
+                                
+                                return 12; 
+                            });
 
-    textT.transition()
-        .delay(function(d, i) {
-            return i * 120;
-        })
-        .text(function(d) {
-            return d.value;
-        });
+    charText.transition()
+            .delay(function(d, i) {
+                return i * 90;
+            })
+            .text(function(d) {
+                return d.value;
+            });
 
-    nodeEnter.append('text')
-        .attr("y", 40)
-        .attr("text-anchor", "middle")
-        .text(function(d, i) {
-            return d.code;
-        }).style({'font-size': '10px', 'font-weight': 'normal'})
+    //Enter the code'
+    var codeText = nodeEnter.append('text')
+                            .attr("y", 40)
+                            .attr("text-anchor", "middle")
+                            .style('font-size', function(d,i){
+                                if(d.code){                                
+                                    if(d.code.length > 14){
+                                        return 8;
+                                    }
+                                }
+                                return 12; 
+                            })
+                            .style('font-weight', 'normal');
 
-    // Declare the linksâ€¦
-    var link = svg.selectAll("path.link")
+    codeText.transition()
+            .delay(function(d, i) {
+                return i * 90;
+            })
+            .text(function(d, i) {
+                return d.code;
+            })
+
+    //PATH 
+    var path = svg.selectAll("path.link")
         .data(links, function(d) {
             return d.target.id;
         });
 
-    // Enter the links.
-    var linkT = link.enter().insert("path", "g")
+    var pathT = path.enter().insert("path", "g")
         .attr("class", "link");
 
-    linkT.transition()
+    pathT.transition()
         .delay(function(d, i) {
-            return i * 100;
+            return i * 85;
         })
         .attr("d", diagonal);
 }
