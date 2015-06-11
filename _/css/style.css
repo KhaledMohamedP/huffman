@@ -89,15 +89,15 @@ table th {
 /*Media for small screens*/
 @media all and (max-width: 800px) and (min-width: 0px) {
     .deCoder {
-        width: 90%;
+        width: 95%;
         float: left;
     }
     .enCoder {
-        width: 90%;
+        width: 95%;
         float: left;
     }
     .graph {
-        width: 90%;
+        width: 95%;
         float: left;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Huffman file 
+ * Huffman Algorithm 
  */
 
 function Node(char, val, right, left) {

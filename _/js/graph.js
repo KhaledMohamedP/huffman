@@ -15,7 +15,7 @@ function drawGraph(HuffmanTable) {
 
     // Draw graph 
     var margin = {
-            top: 20,
+            top: 25,
             right: 5,
             bottom: 5,
             left: 5
@@ -63,7 +63,9 @@ function drawGraph(HuffmanTable) {
             return i * 80;
         })
         .attr("r", 20)
-        .style("fill", "white")
+        .style("fill", function(d,i){
+            return d.children || d._children ?  '#edece3' : '#fff';
+        })
         .duration(1000)
         .ease('elastic');
 
