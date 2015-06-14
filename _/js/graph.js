@@ -1,7 +1,7 @@
 function drawGraph(HuffmanTable) {
     //parse data 
     var list = HuffmanTable,
-        tableSize = HuffmanTable.length; 
+        tableSize = HuffmanTable.length;
 
     while (list.length > 1) {
         var y = list.pop();
@@ -50,66 +50,80 @@ function drawGraph(HuffmanTable) {
         });
 
     var nodeEnter = node.enter().append("g")
-                                .attr("class", "node")
-                                .attr("transform", function(d) {
-                                    return "translate(" + d.x + "," + d.y + ")";
-                                });
+        .attr("class", "node")
+        .attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
 
     var circle = nodeEnter.append("circle")
-                          .attr("r", 0);
+        .attr("r", 0);
 
     circle.transition()
         .delay(function(d, i) {
             return i * 80;
         })
         .attr("r", 20)
-        .style("fill", function(d,i){
-            return d.children || d._children ?  '#edece3' : '#fff';
+        .style("fill", function(d, i) {
+            return d.children || d._children ? '#edece3' : '#fff';
         })
         .duration(1000)
         .ease('elastic');
 
     //Enter the char 
     var charText = nodeEnter.append('text')
-                            .attr('y', 5)
-                            .attr("text-anchor", "middle")
-                            .style('font-size', function(d,i){
-                                if(d.value.length > 14){
-                                    return 8;
-                                }
-                                
-                                return 12; 
-                            });
+        .attr('y', 5)
+        .attr("text-anchor", "middle")
+        .style('font-size', function(d, i) {
+            if (d.value.length > 14) {
+                return 8;
+            }
+
+            return 12;
+        });
 
     charText.transition()
-            .delay(function(d, i) {
-                return i * 90;
-            })
-            .text(function(d) {
-                return d.value;
-            });
+        .delay(function(d, i) {
+            return i * 90;
+        })
+        .text(function(d) {
+            return d.value;
+        });
 
     //Enter the code'
     var codeText = nodeEnter.append('text')
-                            .attr("y", 40)
-                            .attr("text-anchor", "middle")
-                            .style('font-size', function(d,i){
-                                if(d.code){                                
-                                    if(d.code.length > 14){
-                                        return 8;
-                                    }
-                                }
-                                return 12; 
-                            })
-                            .style('font-weight', 'normal');
+        .attr("y", 40)
+        .attr("text-anchor", "middle")
+        .style('font-size', function(d, i) {
+            if (d.code) {
+                if (d.code.length > 14) {
+                    return 8;
+                }
+            }
+            return 11;
+        })
+        .style('font-weight', 'normal');
 
     codeText.transition()
-            .delay(function(d, i) {
-                return i * 90;
-            })
-            .text(function(d, i) {
-                return d.code;
-            })
+        .delay(function(d, i) {
+            return i * 90;
+        })
+        .text(function(d, i) {
+            return d.code;
+        })
+
+    //Enter the path code 
+    var pathText = nodeEnter.append('text')
+        .attr("y", -30)
+        .style('font-size', '10px');
+        
+    pathText.transition()
+        .delay(function(d, i) {
+            return i * 85;
+        })
+        .text(function(d) {
+            return d.code ? d.code.substr(d.code.length - 1) : 1
+        });
+
 
     //PATH 
     var path = svg.selectAll("path.link")
