@@ -1,6 +1,6 @@
 function drawGraph(HuffmanTable) {
     //parse data 
-    var list = HuffmanTable,
+    var list = [].concat(HuffmanTable),
         tableSize = HuffmanTable.length;
 
     while (list.length > 1) {
@@ -44,12 +44,12 @@ function drawGraph(HuffmanTable) {
         d.y = d.depth * 70;
     });
 
-    var node = svg.selectAll("g.node")
+    var gNode = svg.selectAll("g.node")
         .data(nodes, function(d) {
             return d.id || (d.id = ++i);
         });
 
-    var nodeEnter = node.enter().append("g")
+    var nodeEnter = gNode.enter().append("g")
         .attr("class", "node")
         .attr("transform", function(d) {
             return "translate(" + d.x + "," + d.y + ")";
@@ -89,10 +89,12 @@ function drawGraph(HuffmanTable) {
             return d.value;
         });
 
-    //Enter the code'
+    //Enter the code & frequency 
     var codeText = nodeEnter.append('text')
         .attr("y", 40)
+        .attr("id", "code")
         .attr("text-anchor", "middle")
+        .style('display', 'none')
         .style('font-size', function(d, i) {
             if (d.code) {
                 if (d.code.length > 14) {
@@ -101,21 +103,25 @@ function drawGraph(HuffmanTable) {
             }
             return 11;
         })
-        .style('font-weight', 'normal');
-
-    codeText.transition()
-        .delay(function(d, i) {
-            return i * 90;
-        })
+        .style('font-weight', 'normal')
         .text(function(d, i) {
             return d.code;
         })
 
-    //Enter the path code 
+    gNode.on('mouseover', function() {
+        d3.select(this).select('#code')
+            .style('display', 'block');
+
+    }).on('mouseout', function() {
+        d3.select(this).select('#code')
+            .style('display', 'none');
+    })
+
+    //Enter the path code  0/1
     var pathText = nodeEnter.append('text')
         .attr("y", -30)
         .style('font-size', '10px');
-        
+
     pathText.transition()
         .delay(function(d, i) {
             return i * 85;

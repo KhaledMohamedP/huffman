@@ -2,9 +2,9 @@
  * Huffman Algorithm 
  */
 
-function Node(char, val, right, left) {
+function Node(char, freq, right, left) {
     this.value = char;
-    this.freq = val;
+    this.freq = freq;
     this.code = '';
     this.right = right;
     this.left = left;
@@ -55,12 +55,12 @@ HuffmanCoding.prototype = {
             }
         }
 
-        //sort each node based on frequency 
+        //sort list of nodes based on frequency Ascending 
         list.sort(function(a, b) {
             return a.freq - b.freq;
         });
 
-        return list.reverse();
+        return list.reverse(); //return nodes in Descending order 
     },
     createTree: function() {
         var list = [].concat(this.table);
@@ -89,8 +89,7 @@ HuffmanCoding.prototype = {
     },
     readCode: function(code) {
         var node = this.root,
-            output = [],
-            code = code.replace(/\s/g, '');
+            output = [];
         while (code.length > 0) {
             var ch = code.charAt(0);
             if (ch === '0' && node.left != null) {
@@ -134,11 +133,10 @@ HuffmanCoding.prototype = {
             'totalBits': this.input.length * 8 /* char * ASCII bit*/ ,
             'totalCode': 0 /* Total Binary bits */
         }
-        for (var i = 0; i < this.table.length; i++) {
-            result.totalCode += this.table[i].code.length;
-        }
+        result.totalCode = this.createOutput().join('').length;
+
         result['compressionRatio'] = result.totalBits / result.totalCode;
-        result['compressionPrecent'] = result.totalCode / result.totalBits;
+        result['compressionPrecent'] = result.totalCode / result.totalBits * 100;
         return result;
     }
 }
