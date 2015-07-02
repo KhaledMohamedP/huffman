@@ -64,7 +64,7 @@ function drawGraph(HuffmanTable) {
         })
         .attr("r", 20)
         .style("fill", function(d, i) {
-            return d.children || d._children ? '#edece3' : '#fff';
+            return d.children || d._children ? '#FFE066' : '#fff';
         })
         .duration(1000)
         .ease('elastic');

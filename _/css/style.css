@@ -3,7 +3,7 @@
 }
 textarea {
     width: 95%;
-    border: 5px solid #edece3;
+    border: 5px solid #FFE066;
     padding: 5px;
     margin: 2px 0;
 }
@@ -15,6 +15,7 @@ textarea {
     border-radius: 10px;
     float: left;
     margin: 5px;
+    border: 1px solid #F5DEB3; 
 }
 
 .graph{
@@ -29,7 +30,8 @@ textarea {
 }
 
 .box #result {
-    background: #edece3;
+    background: #F25F5C;
+    color: #fff; 
     padding: 5px;
     word-wrap: break-word;
 }
@@ -66,8 +68,8 @@ table tr {
 }
 
 table th {
-    background-color: #edece3;
-    color: #444444;
+    background-color: #F25F5C;
+    color: #fff;
 }
 
 .code {
