@@ -39,6 +39,7 @@ textarea {
 /* table */
 table {
     width: 100%;
+    box-shadow: -3px 3px #808080; 
 }
 
 table, th, td {
